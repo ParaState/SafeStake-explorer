@@ -1,0 +1,4 @@
+yarn run v1.22.18
+$ cross-env NODE_ENV=development INLINE_RUNTIME_CHUNK=false node scripts/start.js
+Something is already running on port 3000.
+Done in 2.28s.
