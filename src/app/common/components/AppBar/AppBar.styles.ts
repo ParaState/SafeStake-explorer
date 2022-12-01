@@ -45,6 +45,7 @@ export const useStyles = makeStyles((theme) => ({
     menuButton: {
         // marginRight: 24,
         // marginLeft: 'auto',
+        color: applicationStore.isDarkMode ? 'white' : 'black',
     },
     SearchIcon: {
         width: 24,

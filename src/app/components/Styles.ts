@@ -1,6 +1,9 @@
 import { makeStyles } from '@material-ui/core/styles';
+import ApplicationStore from '~app/common/stores/Application.store';
+import BaseStore from '~app/common/stores/BaseStore';
 import { defaultFont } from '~root/theme';
 
+const applicationStore: ApplicationStore = BaseStore.getInstance().getStore('Application');
 export const useStyles = makeStyles((theme) => ({
     mainContainer: {
         height: '100%',
@@ -155,13 +158,14 @@ export const useStyles = makeStyles((theme) => ({
     },
     paperContainer: {
         padding: 30,
+        backgroundColor: applicationStore.isDarkMode ? '#060440' : '#fafafa',
         '@media (max-width:1080px)': {
             padding: 15,
         },
     },
     tableWithBorder: {
         border: '1px solid transparent',
-        borderRadius: 6,
+        borderRadius: 10,
         fontSize: 18,
         '& h3': {
             fontFamily: defaultFont,
@@ -170,7 +174,7 @@ export const useStyles = makeStyles((theme) => ({
             fontSize: 18,
         },
         '& > .MuiTableContainer-root': {
-            borderRadius: 6,
+            borderRadius: 15,
         },
         '& .MuiTableCell-head': {
             fontWeight: 'bold',

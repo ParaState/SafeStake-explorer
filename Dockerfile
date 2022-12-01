@@ -1,14 +1,13 @@
 # Stage 1
-FROM node:16 as build-stage
+FROM node:14 as builder
 
-WORKDIR /safestake-explorer
-COPY . .
+COPY . /app
+WORKDIR /app
+
 RUN yarn install && DISABLE_ESLINT_PLUGIN=true npm run build
 
-# Stage 2
-FROM nginx:1.17.0-alpine
-
-COPY --from=build-stage /safestake-explorer/build /usr/share/nginx/html
-EXPOSE $EXPLORER_DOCKER_PORT
-
-CMD nginx -g 'daemon off;'
+# # Stage 2
+FROM nginx:stable
+ARG CENV
+COPY "./deploy/nginx_$CENV.conf" /etc/nginx/conf.d/default.conf
+COPY --from=builder /app/build /usr/share/nginx/html

@@ -12,12 +12,12 @@ const CopyIcon = ({ width, height, style }: CopyIconProps) => {
   const stores = useStores();
   const applicationStore: ApplicationStore = stores.Application;
   const containerStyle = { cursor: 'pointer', ...style ?? {} };
+  const imgSrc = `/images/copy${applicationStore.isDarkMode ? '-white' : ''}.svg`;
   const defaultIconSize = 24;
 
   return (
     <span style={containerStyle}>
-      {!applicationStore.isDarkMode && <img width={width ?? style?.width ?? defaultIconSize} height={height ?? style?.height ?? defaultIconSize} src="/images/copy.svg" alt="Copy" />}
-      {applicationStore.isDarkMode && <img width={width ?? style?.width ?? defaultIconSize} height={height ?? style?.height ?? defaultIconSize} src="/images/copy-white.svg" alt="Copy" />}
+      <img width={width ?? style?.width ?? defaultIconSize} height={height ?? style?.height ?? defaultIconSize} src={imgSrc} alt="Copy" />
     </span>
   );
 };

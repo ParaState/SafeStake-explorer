@@ -1,5 +1,6 @@
 export const NETWORKS = {
   MAINNET: 1,
+  ROPSTEN: 3,
   GOERLI: 5,
   PRATER: 99,
 };
@@ -18,5 +19,7 @@ export const getBaseBeaconchaUrl = (networkId?: number) => {
       return 'https://pyrmont.beaconcha.in';
     case NETWORKS.MAINNET:
       return 'https://beaconcha.in';
+    case NETWORKS.ROPSTEN:
+      return 'https://ropsten.beaconcha.in';
   }
 };

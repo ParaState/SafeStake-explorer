@@ -15,7 +15,10 @@ import StyledRow from '~app/common/components/Table/StyledRow';
 import StyledCell from '~app/common/components/Table/StyledCell';
 import PaginationActions from '~app/common/components/DataTable/components/PaginationActions';
 import { overviewTableHeadersStyle } from '~app/components/Overview/components/Tables/Operators/Operators';
+import BaseStore from '~app/common/stores/BaseStore';
+import ApplicationStore from '~app/common/stores/Application.store';
 
+const applicationStore: ApplicationStore = BaseStore.getInstance().getStore('Application');
 export const overviewTableHeadBackgroundStyle: any = { backgroundColor: '#4DC9F0' };
 export const overviewValidatorsTableHeadBackgroundStyle: any = { backgroundColor: '#3F3ACA' };
 export const overviewTableFooterBackgroundStyle: any = { backgroundColor: '#4DC9F0', color: 'white' };
@@ -129,7 +132,7 @@ const DataTable = (props: DataTableProps) => {
                 ))}
             </TableRow>
           </TableHead>
-          <TableBody>
+          <TableBody style={{ backgroundColor: applicationStore.isDarkMode ? '#353374' : '#fafafa' }}>
             {dataRows()}
           </TableBody>
         </Table>

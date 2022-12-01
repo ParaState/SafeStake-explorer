@@ -32,7 +32,7 @@ export default (props: OperatorProps) => {
         </Typography>
 
         <span className={operatorClasses.OperatorAddress}>
-          0x{longStringShorten(params.address, 4)}
+          {longStringShorten(params.address, 4)}
           &nbsp;
           <CopyToClipboardIcon
             data={params.address}

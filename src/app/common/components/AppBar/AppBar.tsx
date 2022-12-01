@@ -180,13 +180,13 @@ const AppBarComponent = () => {
                   )}
                   <div className={classes.SecondSection}>
                     {!isSearchOpened && !isOverviewPage() && (
-                    <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" onClick={() => toggleSearch(true)}>
+                    <IconButton edge="start" className={classes.menuButton} aria-label="menu" onClick={() => toggleSearch(true)}>
                       <SearchIcon className={classes.SearchIcon} />
                     </IconButton>
                     )}
                   </div>
                   <DarkModeSwitcher style={{ marginLeft: 'auto', marginRight: 0 }} />
-                  <IconButton edge="end" className={classes.menuButton} color="inherit" aria-label="menu" onClick={() => toggleDrawer(true)}>
+                  <IconButton edge="end" className={classes.menuButton} aria-label="menu" onClick={() => toggleDrawer(true)}>
                     <MenuIcon />
                   </IconButton>
                   <Drawer

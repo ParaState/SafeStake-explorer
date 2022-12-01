@@ -175,7 +175,7 @@ const SmartSearch = (props: SmartSearchProps) => {
             style={{ width: '100%' }}
           >
             <Grid item className={classes.BlackText}>
-              0x{option.public_key}
+              {option.public_key}
             </Grid>
           </Link>
           )}

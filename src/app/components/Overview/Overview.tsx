@@ -16,7 +16,7 @@ const Overview = () => {
   const classes = useStyles();
   const tableContainerStyle = {
     'boxShadow': 'none',
-    'borderRadius': '10px',
+    'borderRadius': '15px',
   };
 
   return (

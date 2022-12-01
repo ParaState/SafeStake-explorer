@@ -23,7 +23,10 @@ import {
   overviewTableCellStyle,
   overviewTableHeadersStyle,
 } from '~app/components/Overview/components/Tables/Operators/Operators';
+import ApplicationStore from '~app/common/stores/Application.store';
+import BaseStore from '~app/common/stores/BaseStore';
 
+const applicationStore: ApplicationStore = BaseStore.getInstance().getStore('Application');
 export const overviewTableHeadBackgroundStyle: any = { backgroundColor: '#3F3ACA' };
 
 const Validators = () => {
@@ -37,7 +40,7 @@ const Validators = () => {
     if (!validators.length && !loadingValidators) {
       loadValidators();
     }
-  });
+  }, []);
 
   /**
    * Load first page of validators
@@ -53,41 +56,42 @@ const Validators = () => {
   };
 
   return (
-    <TableContainer component={MaterialPaper}>
-      <Table aria-label="Operators">
-        <TableHead style={overviewTableHeadBackgroundStyle}>
-          <TableRow>
-            <StyledCell style={overviewTableHeadersStyle}>Public Key</StyledCell>
-            <StyledCell style={overviewTableHeadersStyle}>Operators</StyledCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {validators.map((row: any, rowIndex: number) => (
-            <StyledRow key={rowIndex}>
-              <StyledCell style={overviewTableCellStyle}>
-                <Link href={`/validators/${row.public_key}`} className={classes.Link}>
-                  {longStringShorten(row.public_key)}
-                </Link>
-              </StyledCell>
-              <StyledCell style={overviewTableCellStyle}>
-                <>
-                  {row.operators.map((operator: any) => (
-                    <span key={`operator-link-${operator.address}`}>
-                      <Link
-                        href={`${config.routes.OPERATORS.HOME}/${operator.address}`}
-                        className={classes.Link}
+    <div className={classes.tableWithBorder}>
+      <TableContainer component={MaterialPaper}>
+        <Table aria-label="Operators">
+          <TableHead style={overviewTableHeadBackgroundStyle}>
+            <TableRow>
+              <StyledCell style={overviewTableHeadersStyle}>Public Key</StyledCell>
+              <StyledCell style={overviewTableHeadersStyle}>Operators</StyledCell>
+            </TableRow>
+          </TableHead>
+          <TableBody style={{ backgroundColor: applicationStore.isDarkMode ? '#353374' : '#fafafa' }}>
+            {validators.map((row: any, rowIndex: number) => (
+              <StyledRow key={rowIndex}>
+                <StyledCell style={overviewTableCellStyle}>
+                  <Link href={`/validators/${row.public_key}`} className={classes.Link}>
+                    {longStringShorten(row.public_key)}
+                  </Link>
+                </StyledCell>
+                <StyledCell style={overviewTableCellStyle}>
+                  <>
+                    {row.operators.map((operator: any) => (
+                      <span key={`operator-link-${operator.address}`}>
+                        <Link
+                          href={`${config.routes.OPERATORS.HOME}/${operator.address}`}
+                          className={classes.Link}
                       >
-                        {operator.name}
-                      </Link>
+                          {operator.name}
+                        </Link>
                       &nbsp;
-                    </span>
+                      </span>
                   ))}
-                </>
-              </StyledCell>
-            </StyledRow>
+                  </>
+                </StyledCell>
+              </StyledRow>
           ))}
 
-          {loadingValidators && (
+            {loadingValidators && (
             <StyledRow key="validators-placeholder">
               <StyledCell style={overviewTableCellStyle}>
                 <Skeleton />
@@ -98,18 +102,19 @@ const Validators = () => {
             </StyledRow>
           )}
 
-          {validators.length ? (
-            <TableRow>
-              <CenteredCell colSpan={2} style={overviewTableCellStyle}>
-                <Link href={config.routes.VALIDATORS.HOME} className={classes.Link}>
-                  Load more <ArrowDropDownIcon />
-                </Link>
-              </CenteredCell>
-            </TableRow>
+            {validators.length ? (
+              <TableRow>
+                <CenteredCell colSpan={2} style={overviewTableCellStyle}>
+                  <Link href={config.routes.VALIDATORS.HOME} className={classes.Link}>
+                    Load more <ArrowDropDownIcon />
+                  </Link>
+                </CenteredCell>
+              </TableRow>
           ) : <TableRow />}
-        </TableBody>
-      </Table>
-    </TableContainer>
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </div>
   );
 };
 

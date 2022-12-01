@@ -153,9 +153,9 @@ export default (props: ValidatorDutiesProps) => {
   }, [loadingDuties, validator?.public_key]);
 
   return (
-    <PaddedGridItem item xs={12} md={9} paddingleft={30}>
+    <PaddedGridItem item xs={12} md={8} paddingleft={30}>
       <DataTable
-        title="Duties"
+        title="Succeed Duties"
         headers={['Epoch', 'Slot', 'Duty', 'Status', 'Operator Consensus Breakdown']}
         data={(validator?.public_key ? (validatorDuties ?? []) : []).map((duty: any) => {
           return [

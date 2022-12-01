@@ -22,6 +22,9 @@ import StyledRow from '~app/common/components/Table/StyledRow';
 import StyledCell from '~app/common/components/Table/StyledCell';
 import PerformanceStore from '~app/common/stores/Performance.store';
 import { overviewTableHeadersStyle } from '~app/components/Overview/components/Tables/Operators/Operators';
+import ApplicationStore from '~app/common/stores/Application.store';
+
+const applicationStore: ApplicationStore = BaseStore.getInstance().getStore('Application');
 
 const PerformanceSwitcher = styled.span<({ selected?: boolean })>`
   margin-top: 3px;
@@ -166,7 +169,7 @@ const ValidatorOperators = (props: ValidatorOperatorProps) => {
               </TableCell>
             </TableRow>
           </TableHead>
-          <TableBody>
+          <TableBody style={{ backgroundColor: applicationStore.isDarkMode ? '#353374' : '#fafafa' }}>
             {!validator?.operators && (
               [1, 2, 3, 4].map((skeleton: any) => (
                 <StyledRow

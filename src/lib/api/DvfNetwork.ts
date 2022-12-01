@@ -19,7 +19,7 @@ class DvfNetwork {
 
   get network() {
     // TODO: use network selected by user (local storage or whatever)
-    return 'prater';
+    return 'goerli';
   }
 
   static getInstance(): DvfNetwork {
@@ -175,7 +175,7 @@ class DvfNetwork {
   }
 
   static getActiveNetwork() {
-    const defaultNetwork = 'prater';
+    const defaultNetwork = 'goerli';
     try {
       return window.localStorage.getItem('chain_network') || defaultNetwork;
     } catch (e) {

@@ -19,7 +19,10 @@ import OperatorType from '~app/common/components/OperatorType';
 import StyledRow from '~app/common/components/Table/StyledRow';
 import StyledCell from '~app/common/components/Table/StyledCell';
 import CenteredCell from '~app/common/components/Table/CenteredCell';
+import ApplicationStore from '~app/common/stores/Application.store';
+import BaseStore from '~app/common/stores/BaseStore';
 
+const applicationStore: ApplicationStore = BaseStore.getInstance().getStore('Application');
 export const overviewTableHeadersStyle: any = { textTransform: 'uppercase', fontSize: 12, fontWeight: 'bold', color: 'white' };
 export const overviewTableCellStyle: any = { fontSize: 14, height: 62, paddingTop: 0, paddingBottom: 0 };
 export const overviewTableHeadBackgroundStyle: any = { backgroundColor: '#4DC9F0' };
@@ -35,7 +38,7 @@ const Operators = () => {
     if (!operators.length && !loadingOperators) {
       loadOperators();
     }
-  });
+  }, []);
 
   /**
    * Load first page of operators
@@ -51,62 +54,64 @@ const Operators = () => {
   };
 
   return (
-    <TableContainer component={MaterialPaper}>
-      <Table aria-label="Operators">
-        <TableHead style={overviewTableHeadBackgroundStyle}>
-          <TableRow>
-            <StyledCell style={overviewTableHeadersStyle}>Address</StyledCell>
-            <StyledCell style={overviewTableHeadersStyle}>Name</StyledCell>
-            <StyledCell style={overviewTableHeadersStyle}>Validators</StyledCell>
-          </TableRow>
-        </TableHead>
+    <div className={classes.tableWithBorder}>
+      <TableContainer component={MaterialPaper}>
+        <Table aria-label="Operators">
+          <TableHead style={overviewTableHeadBackgroundStyle}>
+            <TableRow>
+              <StyledCell style={overviewTableHeadersStyle}>Address</StyledCell>
+              <StyledCell style={overviewTableHeadersStyle}>Name</StyledCell>
+              <StyledCell style={overviewTableHeadersStyle}>Validators</StyledCell>
+            </TableRow>
+          </TableHead>
 
-        <TableBody>
-          {operators.map((row: any, rowIndex) => (
-            <StyledRow key={rowIndex} isoperators={+true}>
-              <StyledCell style={overviewTableCellStyle}>
-                <Link href={`/operators/${row.address}`} className={classes.Link}>
-                  {longStringShorten(row.address)}
-                </Link>
-              </StyledCell>
-              <StyledCell style={overviewTableCellStyle}>
-                <Link href={`/operators/${row.address}`} className={classes.Link}>
-                  {row.name}
-                  <OperatorType type={row.type} />
-                </Link>
-              </StyledCell>
-              <StyledCell style={overviewTableCellStyle}>
-                {row.validators_count}
-              </StyledCell>
-            </StyledRow>
+          <TableBody style={{ backgroundColor: applicationStore.isDarkMode ? '#353374' : '#fafafa' }}>
+            {operators.map((row: any, rowIndex) => (
+              <StyledRow key={rowIndex} isoperators={+true}>
+                <StyledCell style={overviewTableCellStyle}>
+                  <Link href={`/operators/${row.address}`} className={classes.Link}>
+                    {longStringShorten(row.address)}
+                  </Link>
+                </StyledCell>
+                <StyledCell style={overviewTableCellStyle}>
+                  <Link href={`/operators/${row.address}`} className={classes.Link}>
+                    {row.name}
+                    <OperatorType type={row.type} />
+                  </Link>
+                </StyledCell>
+                <StyledCell style={overviewTableCellStyle}>
+                  {row.validators_count}
+                </StyledCell>
+              </StyledRow>
           ))}
 
-          {loadingOperators ? (
-            <StyledRow key="operators-placeholder" isoperators={+true}>
-              <StyledCell style={overviewTableCellStyle}>
-                <Skeleton />
-              </StyledCell>
-              <StyledCell style={overviewTableCellStyle}>
-                <Skeleton />
-              </StyledCell>
-              <StyledCell style={overviewTableCellStyle}>
-                <Skeleton />
-              </StyledCell>
-            </StyledRow>
+            {loadingOperators ? (
+              <StyledRow key="operators-placeholder" isoperators={+true}>
+                <StyledCell style={overviewTableCellStyle}>
+                  <Skeleton />
+                </StyledCell>
+                <StyledCell style={overviewTableCellStyle}>
+                  <Skeleton />
+                </StyledCell>
+                <StyledCell style={overviewTableCellStyle}>
+                  <Skeleton />
+                </StyledCell>
+              </StyledRow>
           ) : <></>}
 
-          {operators.length ? (
-            <TableRow>
-              <CenteredCell colSpan={3} style={overviewTableCellStyle}>
-                <Link href={config.routes.OPERATORS.HOME} className={classes.Link}>
-                  Load more <ArrowDropDownIcon />
-                </Link>
-              </CenteredCell>
-            </TableRow>
+            {operators.length ? (
+              <TableRow>
+                <CenteredCell colSpan={3} style={overviewTableCellStyle}>
+                  <Link href={config.routes.OPERATORS.HOME} className={classes.Link}>
+                    Load more <ArrowDropDownIcon />
+                  </Link>
+                </CenteredCell>
+              </TableRow>
           ) : <TableRow />}
-        </TableBody>
-      </Table>
-    </TableContainer>
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </div>
   );
 };
 

@@ -14,6 +14,9 @@ export const defaultFont = '"Encode Sans", "Roboto", "Helvetica", "Arial", sans-
 export const AppTheme = ({ isDarkMode }: ThemeParams): any => {
   return {
     palette: {
+      background: {
+        default: isDarkMode ? '#060440' : '#fafafa',
+      },
       divider: '#5B6C84',
       type: isDarkMode ? 'dark' : 'light',
     },

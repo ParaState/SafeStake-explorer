@@ -12,7 +12,7 @@ type Props = {
 
 const Status = (props: Props) => {
     const [showTooltip, setShowTooltip] = useState(false);
-    const classes = useStyles({ isActive: props.status === 'Active', isBig: props.big });
+    const classes = useStyles({ isActive: props.status, isBig: props.big });
 
     const handleMouseEnter = () => {
         setShowTooltip(true);

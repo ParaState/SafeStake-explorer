@@ -115,7 +115,6 @@ const Validator = () => {
       scaleX: 0,
       transformOrigin: 'center',
       ease: Bounce.easeOut,
-      stagger: 0.1,
       duration: 1,
     })
     .from(
@@ -129,20 +128,19 @@ const Validator = () => {
         scaleX: 0,
         transformOrigin: 'center',
         ease: Circ.easeOut,
-        stagger: 0.1,
         duration: 1,
       },
     )
     .fromTo(
       q('#svg_76'),
       { drawSVG: '0%' },
-      { duration: 0.5, drawSVG: '-100%', stagger: 0.1 },
+      { duration: 0.5, drawSVG: '-100%' },
       '-=1',
     )
     .fromTo(
       q('#svg_59'),
       { drawSVG: '40% 40%' },
-      { duration: 0.6, drawSVG: '100%', stagger: 0.1 },
+      { duration: 0.6, drawSVG: '100%' },
       '-=0.6',
     )
     .from(
@@ -152,7 +150,6 @@ const Validator = () => {
         scaleX: 0,
         transformOrigin: 'center',
         ease: Circ.easeOut,
-        stagger: 0.1,
         duration: 0.6,
       },
       '-=0.6',
@@ -160,13 +157,13 @@ const Validator = () => {
     .fromTo(
       q('#svg_78'),
       { drawSVG: '0%' },
-      { duration: 0.8, drawSVG: '-100%', stagger: 0.1 },
+      { duration: 0.8, drawSVG: '-100%' },
       '-=0.6',
     )
     .fromTo(
       q('#svg_42'),
       { drawSVG: '50% 50%' },
-      { duration: 0.6, drawSVG: '100%', stagger: 0.1 },
+      { duration: 0.6, drawSVG: '100%' },
       '-=0.6',
     )
     .from(
@@ -176,7 +173,6 @@ const Validator = () => {
         scaleX: 0,
         transformOrigin: 'center',
         ease: Circ.easeOut,
-        stagger: 0.1,
         duration: 0.6,
       },
       '-=0.6',
@@ -184,24 +180,22 @@ const Validator = () => {
     .fromTo(
       q('#svg_114'),
       { drawSVG: '0%' },
-      { duration: 0.8, drawSVG: '-100%', stagger: 0.1 },
+      { duration: 0.8, drawSVG: '-100%' },
       '-=0.6',
     )
     .fromTo(
       q('#svg_97'),
       { drawSVG: '60% 60%' },
-      { duration: 0.6, drawSVG: '100%', stagger: 0.1 },
+      { duration: 0.6, drawSVG: '100%' },
       '-=0.6',
     )
     .from(
       [q('svg > g > g:nth-child(8) > text'), q('svg > g > g:nth-child(8) > use')],
-      0.6,
       {
         scaleY: 0,
         scaleX: 0,
         transformOrigin: 'center',
         ease: Circ.easeOut,
-        stagger: 0.1,
         duration: 0.6,
       },
       '-=0.6',
@@ -209,13 +203,13 @@ const Validator = () => {
     .fromTo(
       q('#svg_77'),
       { drawSVG: '0%' },
-      { duration: 0.5, drawSVG: '-100%', stagger: 0.1 },
+      { duration: 0.5, drawSVG: '-100%' },
       '-=0.6',
     )
     .fromTo(
       q('#svg_2'),
       { drawSVG: '65% 65%' },
-      { duration: 0.6, drawSVG: '100%', stagger: 0.1 },
+      { duration: 0.6, drawSVG: '100%' },
       '-=0.6',
     )
     .from(
@@ -225,11 +219,12 @@ const Validator = () => {
         scaleX: 0,
         transformOrigin: 'center',
         ease: Circ.easeOut,
-        stagger: 0.1,
         duration: 0.6,
       },
       '-=0.6',
-    );
+    )
+    .repeat(-1)
+    .repeatDelay(10);
   }
   useEffect(() => {
     if (!svgFalg || !validator.lastDuty) {
@@ -237,7 +232,7 @@ const Validator = () => {
     }
     fresh();
     const timer = setInterval(() => {
-      fresh();
+      // fresh();
       loadValidator(params.address);
     }, 20000)
     return () => {
@@ -294,12 +289,12 @@ const Validator = () => {
                 <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" width="1000" height="500" xmlSpace="preserve" version="1.1" ref={svgRef}>
                   <defs>
                     <g id="active">
-                      <rect xmlns="http://www.w3.org/2000/svg" strokeWidth="0" height="26" width="68" y="0" x="0" fill="#06b64f1f" />
-                      <text xmlns="http://www.w3.org/2000/svg" xmlSpace="preserve" textAnchor="start" fontFamily="Noto Sans JP" fontSize="12" strokeWidth="0" y="19" x="13" fill="#06b64f">ACTIVE</text>
+                      <rect xmlns="http://www.w3.org/2000/svg" strokeWidth="0" height="26" width="72" y="0" x="-4" fill="#06b64f1f"></rect>
+                      <text xmlns="http://www.w3.org/2000/svg" xmlSpace="preserve" textAnchor="start" fontFamily="Noto Sans JP" fontSize="12" strokeWidth="0" y="19" x="3" fill="#06b64f">SUCCESS</text>
                     </g>
                     <g id="inactive">
-                      <rect xmlns="http://www.w3.org/2000/svg" strokeWidth="0" height="26" width="68" y="0" x="0" fill="#ec1c261f" />
-                      <text xmlns="http://www.w3.org/2000/svg" xmlSpace="preserve" textAnchor="start" fontFamily="Noto Sans JP" fontSize="12" strokeWidth="0" y="19" x="8" fill="#ec1c26">INACTIVE</text>
+                      <rect xmlns="http://www.w3.org/2000/svg" strokeWidth="0" height="26" width="68" y="0" x="-2" fill="#ec1c261f" />
+                      <text xmlns="http://www.w3.org/2000/svg" xmlSpace="preserve" textAnchor="start" fontFamily="Noto Sans JP" fontSize="12" strokeWidth="0" y="19" x="8" fill="#ec1c26">FAILURE</text>
                     </g>
                   </defs>
                   <g>
@@ -350,7 +345,7 @@ const Validator = () => {
           <EmptyPlaceholder height={20} />
 
           <Grid container spacing={3}>
-            <Grid item xs={12} md={3}>
+            <Grid item xs={12} md={4}>
               <ValidatorOperators
                 validator={validator}
                 defaultPerformance={defaultPerformance}
